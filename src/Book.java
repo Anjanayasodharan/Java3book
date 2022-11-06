@@ -114,8 +114,22 @@ public class Book {
                 case 4:
                     System.out.println("update data");
                     break;
+
                 case 5:
-                    break;
+                    System.out.println("delete data");
+                    System.out.println("enter book charge:");
+                    charge=s.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarydb","root","");
+                        String sql="DELETE FROM `books` WHERE `charge`="+charge;
+                        Statement stmt =con.createStatement();
+                        stmt.executeUpdate(sql);
+                        System.out.println("deleted successfully");
+                    }
+                    catch (Exception e){
+                        System.out.println((e));
+                    }
                 case 6:
                     System.out.println("exit");
                     System.exit(0);
