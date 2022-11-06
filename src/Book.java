@@ -85,8 +85,32 @@ public class Book {
                     break;
                 case 3:
                     System.out.println("search data");
+                    System.out.println("enter charge:");
+                    charge=s.nextInt();
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarydb","root","");
+                        String sql="SELECT `author`, `title`, `category`, `charge` FROM `books` WHERE `charge`="+String.valueOf(charge);
+                        Statement stmt = con.createStatement();
+                        ResultSet rs= stmt.executeQuery(sql);
+                        while(rs.next()){
+                            String getauthor=rs.getString("author");
+                            String gettitle=rs.getString("title");
+                            String getcategory=rs.getString("category");
+                            String getcharge=rs.getString("charge");
 
+
+                            System.out.println("author="+getauthor);
+                            System.out.println("title="+gettitle);
+                            System.out.println("category="+getcategory);
+                            System.out.println("charge="+getcharge);
+                        }
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
+
                 case 4:
                     System.out.println("update data");
                     break;
