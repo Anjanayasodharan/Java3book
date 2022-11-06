@@ -29,8 +29,31 @@ public class Book {
             {
                 case 1:
                     System.out.println("insertdata");
+                    System.out.println("enter author name");
+                    author=s.next();
+                    System.out.println("enter title name");
+                    title=s.next();
+                    System.out.println("enter category");
+                    category=s.next();
+                    System.out.println("enter charge ");
+                    charge=s.nextInt();
 
+                    try{
+                        Class.forName("com.mysql.jdbc.Driver");
+                        Connection con = DriverManager.getConnection("jdbc:mysql://localhost:3306/librarydb","root","");
+                        String sql="INSERT INTO `books`(`author`, `title`, `category`, `charge`) VALUES (?,?,?,?,?)";
+                        PreparedStatement stmt = con.prepareStatement(sql);
+                        stmt.setString(1,author);
+                        stmt.setString(2,title);
+                        stmt.setString(3,category );
+                        stmt.setInt(4,charge);
+
+                    }
+                    catch (Exception e){
+                        System.out.println(e);
+                    }
                     break;
+
                 case 2:
                     System.out.println("select data");
 
